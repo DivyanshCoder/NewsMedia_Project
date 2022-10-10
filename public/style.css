@@ -133,6 +133,28 @@ li {
 }
 
 
+
+/* button liked and disliked */
+ button{
+  cursor: pointer;
+  outline: 0;
+  color: #AAA;
+  margin: 15px 15px;
+
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.green{
+  color: green;
+}
+
+.red{
+  color: red;
+} 
+
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
