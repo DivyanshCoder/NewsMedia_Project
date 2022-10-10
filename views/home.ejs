@@ -1,38 +1,39 @@
 <%- include('header'); -%>
-<div class="container">
+
 
     <% posts.forEach(function(post) { %>
 
       
-        <article class="card">
-            <header class="cardThumb">
-                <a href="#">
-                    <img src="<%=post.image %>">
-                </a>
-            </header>
-            <div class="cardDate">
-                <span class="cardDateDay">1</span>
-                <span class="cardDateMonth"><%=post.postAt%></span>
-            </div>
-            <div class="cardBody">
-                <div class="cardCategory"><a href="#">Photos</a></div>
-                <h2 class="cardTitle"><a href="#"><%=post.title%></a></h2>
-                <div class="cardSubtitle"><%=post.content.substring(0,100)+"..."%></div>
-                <p class="cardDescription">
-                  <%=post.content%>
-                </p>
-            </div>
-            <!-- <footer class="cardFooter">
-                <span class="icon icon--time"></span>33 min
-                <span class="icon icon--comment"></span><a href="#">1 comments</a>
-            </footer> -->
-        </article>
+        <div class="divider">
+            <div class="container">
+                <div class="product-img"> 
+                  <img src="<%=post.image %>"
+                    alt=""
+                  />
+                  <div>
     
-    
+                      <h1><%=post.title%></h1>
+                  </div>
+                </div>
+                <div class="product-desc">
+                  <div class="product-text">
+                   
+                    <h2><%=post.postAt%></h2>
+                    <p>
+                        <%=post.content%>
+                    </p>
+                  </div>
+                  <div class="product-price">
+                    <!-- <p><span>99.9 $</span></p> -->
+                    <a href="<%=post.readMore%>">Read More</a>
+                  </div>
+                </div>
+              </div>
+        
+        </div>
          
     
 
         <% }); %>
 
-</div>
 <%- include('footer'); -%>
