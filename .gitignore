@@ -1,0 +1,10 @@
+/node_modules
+/config
+/models
+/middlewares
+/utility
+.env
+package-lock.json
+README.md
+npm-debug.log
+.DS_Store
