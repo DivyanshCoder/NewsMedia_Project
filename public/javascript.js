@@ -19,3 +19,19 @@
   
 // });
 
+// let liked = $('.green').click(function(e) {
+//     console.log(e.id);
+// })
+
+
+function liked(number,offset){
+    let data = {number : number,offset:offset}
+    $.post("/liked", data, function (data, status) {
+        console.log("Post is done ");
+    });
+    console.log(number);
+    console.log(offset);
+}
+
+// let data = 7897979;
+

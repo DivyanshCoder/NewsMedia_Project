@@ -1,13 +1,16 @@
 <%- include('header'); -%>
+<div class="parent">
 
 
+<% var number = 0, counter = 0;%>
     <% posts.forEach(function(post) { %>
 
-      
-        <div class="divider">
+        <% number++%>
+        <div  class="divider">
             
             <div class="container">
                 <div class="product-img"> 
+                  
                   <img src="<%=post.image %>"
                     alt=""
                   />
@@ -29,9 +32,15 @@
                     <a href="<%=post.readMore%>">Read More</a>
                   </div>
                 </div>
-                <button  class="btn" id="green"> <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-              <button  class="btn" id="red"> <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
-              <button  class="btn" > <i class="fa fa-comment fa-lg"></i> </button>
+                <button onclick="liked('<%=number%>','<%=dataOffset%>')"  class="btn green" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+                <% if(postData.newData == null ) { %>
+                  <p class="btn">0</p>
+                <% }else if(postData.newData[counter].postNumber == number){ %>   
+                <p class="btn"><%=postData.newData[counter].likes%></p>
+                <% counter++} %> 
+              <button  value="<%=number%>" class="btn red" > <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+              
+              <button  value="<%=number%>" class="btn" > <i class="fa fa-comment fa-lg"></i> </button>
               
               </div>
         
@@ -45,5 +54,5 @@
     
 
         <% }); %>
-
+</div>
 <%- include('footer'); -%>
