@@ -173,6 +173,11 @@ app.post('/liked',function(req,res){
   console.log("fetching ");
 })
 
+
+app.get('/register',function(req, res){
+  res.sendFile(__dirname + "/views/register.html")
+})
+
 let port = 80;
 app.listen(port, function() {
     console.log("http://localhost/");
