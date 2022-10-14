@@ -1,6 +1,6 @@
 {
-  "name": "newsmedia-app",
-  "version": "1.0.0",
+  "name": "newswebsite",
+  "version": "2.0.0",
   "description": "news app where people can post their opinioun about the news",
   "main": "app.js",
   "scripts": {
@@ -16,5 +16,14 @@
     "jquery": "^3.6.1",
     "mongoose": "^6.6.5",
     "nodemon": "^2.0.20"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devajaypatidar/newsApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/devajaypatidar/newsApp/issues"
+  },
+  "homepage": "https://github.com/devajaypatidar/newsApp#readme"
 }
