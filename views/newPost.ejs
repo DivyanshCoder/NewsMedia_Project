@@ -1,0 +1,44 @@
+<%- include('header'); -%>
+<div class="parent">
+<div  class="divider">
+            
+    <div class="container">
+        <div class="product-img"> 
+          
+          <img src="<%=post.image %>"
+            alt=""
+          />
+          <div>
+
+              <h1><%=post.title%></h1>
+          </div>
+        </div>
+        <div class="product-desc">
+          <div class="product-text">
+           
+            <h2><%=post.postAt%></h2>
+            <p>
+                <%=post.content%>
+            </p>
+          </div>
+          <div class="product-price">
+            <!-- <p><span>99.9 $</span></p> -->
+            <a href="<%=post.readMore%>">Read More</a>
+          </div>
+        </div>
+        <button onclick="liked('<%=post.postNumber%>','<%=post.newsOffset%>','<%=post.likes%>')"  class="btn green" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+        <p class="btn" id="liked" ><%=post.likes%></p>
+        
+        <button onclick="disliked('<%=post.postNumber%>','<%=post.newsOffset%>','<%=post.dislikes%>')"  class="btn red" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>     
+         <p class="btn" id="" ><%=post.dislikes%></p>
+      <button onclick="liked('<%=post.postNumber%>','<%=post.newsOffset%>',)"  value="<%=post.postNumber%>" class="btn" > <i class="fa fa-comment fa-lg"></i> </button>
+      
+      </div>
+
+
+
+      <!-- liked and dislike button -->
+
+      <script src="/public/javascript.js"></script>
+</div>
+ 

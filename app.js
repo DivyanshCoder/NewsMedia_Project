@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 //body parser
 app.use(bodyParser.urlencoded({extended:true}));
-
+app.use(express.static('public'));
 //connecting to mongodb
 mongoose.connect("mongodb+srv://ajaypatidar:ajay2112@cluster0.kwfo9wy.mongodb.net/?retryWrites=true&w=majority",{
   useNewUrlParser: true,
@@ -64,10 +64,12 @@ var options = {
 
 
 
+
 app.get('/', (req, res) => {
 
-   inshorts.getNews(options , function(result, news_offset){
-    
+
+  inshorts.getNews(options , function(result, news_offset){
+
     
      News.find({newsOffset: news_offset}, function (err, res){
       if(err){
@@ -76,7 +78,6 @@ app.get('/', (req, res) => {
         console.log(res.length);
         if(res.length == 0){
           for(let i=0; i<25;i++){
-
             const newNews = new News({
               newsOffset: news_offset,
               postNumber:i+1,
@@ -87,6 +88,7 @@ app.get('/', (req, res) => {
               content:result[i].content,
               postedAt:result[i].postedAt,
               readMore:result[i].readMore,
+              image: result[i].image,
             })
 
             newNews.save(function(err){
@@ -96,8 +98,6 @@ app.get('/', (req, res) => {
                 console.log("saved securly");
               }
             });
-
-            
           }
         }
       }
@@ -131,35 +131,70 @@ app.get('/', (req, res) => {
 
       }
     });
-
-
-    
-      
-    console.log(post);
+   
+   
     res.render("home", {
       posts: result,
-      // postData:post,
       dataOffset: news_offset}
       );    
 
-    console.log(news_offset);
-
-  });
+    // console.log(news_offset);
   
+  });
+
 });
 
 
-app.post('/liked',function(req,res){
-  console.log(req.body.likes,req.body.offset,req.body.number);
-  News.findOneAndUpdate({newsOffset: req.body.offset,postNumber :req.body.number},{$set:{likes:req.body.likes}},function(err,newsPost){
+
+app.get('/:number/:offset',function(req,res){
+    
+  console.log(req.params.offset,req.params.number);
+  let number = req.params.number;
+  let offset = req.params.offset;
+  News.findOne({newsOffset: offset, postNumber: number},function(err,news){
     if(err){
       console.log(err);
     }else{
-      console.log(newsPost);
+      res.render('newPost',{post : news});
     }
   })
   
 })
+
+
+//liked updation
+
+app.post('/liked', function(req,res) {
+  let offset = req.body.offset;
+  let likes = req.body.likes;
+  let postNumber = req.body.number;
+  console.log(offset,likes,postNumber);
+  News.findOneAndUpdate({newsOffset: offset,postNumber: postNumber}, {$set:{likes:likes}},function(err, doc){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(doc);
+    }
+  })
+});
+
+//disliked
+
+app.post('/disliked', function(req,res) {
+  let offset = req.body.offset;
+  let likes = req.body.likes;
+  let postNumber = req.body.number;
+  console.log(offset,likes,postNumber);
+  News.findOneAndUpdate({newsOffset: offset,postNumber: postNumber}, {$set:{dislikes:likes}},function(err, doc){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(doc);
+    }
+  })
+});
+
+
 
 let port = 80;
 app.listen(port, function() {
