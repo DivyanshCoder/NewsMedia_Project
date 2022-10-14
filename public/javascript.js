@@ -24,13 +24,14 @@
 // })
 
 
-function liked(number,offset){
-    let data = {number : number,offset:offset}
+function liked(number,offset,likes){
+    let data = {number : number,offset:offset,likes:likes+1}
     $.post("/liked", data, function (data, status) {
         console.log("Post is done ");
     });
     console.log(number);
     console.log(offset);
+    console.log(likes);
 }
 
 // let data = 7897979;

@@ -3,7 +3,7 @@ const inshorts = require('inshorts-news-api');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
-
+var Schema = mongoose.Schema;
 
 
 //body parser
@@ -17,34 +17,38 @@ mongoose.connect("mongodb+srv://ajaypatidar:ajay2112@cluster0.kwfo9wy.mongodb.ne
 .then(() => console.log("Successfully connect to MongoDB."))
 .catch(err => console.error("Connection error", err));
 
-const newsSchema = {
+const newsSchema =new Schema( {
   newsOffset: String,
-  newsData: [],
-}
-
-const newsDataSchema = {
+  date: {type:Date ,default: Date.now},
   postNumber: Number,
   likes: Number,
   dislikes: Number,
   comments:[{
-    username: String,
-    content: String,
-  }]
-}
+  username: String,
+  content: String, 
+  }],
+
+  title: String,
+  image:String,
+  content:String,
+  postedAt:String,
+  readMore:String,
+
+});
+
+
 
 const newsOffsetSchema = {
   id: String,
   newsOffset:[],
 }
-
 const NewsOffsetArray = mongoose.model("NewsOffsetArray",newsOffsetSchema);
 
 const News = mongoose.model("News",newsSchema);
+newsSchema.index( { "date": 1 }, { expireAfterSeconds: 86400 } );
 
-const NewsData = mongoose.model("NewsData",newsDataSchema);
 
-
-const ejs = require("ejs");
+// const ejs = require("ejs");
 app.set('view engine', 'ejs');
 app.use(express.static("."));
 
@@ -62,33 +66,40 @@ var options = {
 
 app.get('/', (req, res) => {
 
-  
-  inshorts.getNews(options , function(result, news_offset){
-    // console.log(result);
+   inshorts.getNews(options , function(result, news_offset){
     
-    let postData ="";
-    News.findOne({newsOffset: news_offset},function (err, res){
+    
+     News.find({newsOffset: news_offset}, function (err, res){
       if(err){
         console.log(err);
       }else{
-        if(res==null){
-          const newNews = new News({
-            newsOffset: news_offset,
-          });
+        console.log(res.length);
+        if(res.length == 0){
+          for(let i=0; i<25;i++){
 
-          newNews.save(function(err){
-            if(err){
-              console.log(err);
-            }else{
-              console.log("saved securly");
-            }
-          });
-          postData = newNews;
-        }else{
-          postData = res;
+            const newNews = new News({
+              newsOffset: news_offset,
+              postNumber:i+1,
+              likes:0,
+              dislikes:0,
+              comments:[],
+              title:result[i].title,
+              content:result[i].content,
+              postedAt:result[i].postedAt,
+              readMore:result[i].readMore,
+            })
+
+            newNews.save(function(err){
+              if(err){
+                console.log(err);
+              }else{
+                console.log("saved securly");
+              }
+            });
+
+            
+          }
         }
-        
-
       }
     });
 
@@ -97,7 +108,7 @@ app.get('/', (req, res) => {
       if(err){
         console.log(err);
       }else{
-        var flag= false;
+        let flag= false;
         // console.log(Arrayresult.newsOffset);
         for(var i=0;i<Arrayresult.newsOffset.length;i++){
           if(Arrayresult.newsOffset[i] == news_offset){
@@ -119,15 +130,19 @@ app.get('/', (req, res) => {
         }
 
       }
-    })
+    });
 
+
+    
+      
+    console.log(post);
     res.render("home", {
       posts: result,
-      dataOffset: news_offset,
-      postData:postData}
-      );
+      // postData:post,
+      dataOffset: news_offset}
+      );    
 
-    // console.log(news_offset);
+    console.log(news_offset);
 
   });
   
@@ -135,42 +150,15 @@ app.get('/', (req, res) => {
 
 
 app.post('/liked',function(req,res){
-
-  News.find({newsOffset: req.body.offset},function(err,news){
+  console.log(req.body.likes,req.body.offset,req.body.number);
+  News.findOneAndUpdate({newsOffset: req.body.offset,postNumber :req.body.number},{$set:{likes:req.body.likes}},function(err,newsPost){
     if(err){
       console.log(err);
     }else{
-      console.log(news);
-      // if(news.newsData == null){
-      //   console.log("creating a newsData")
-      //   let newArray = {
-      //     postNumber: req.body.number,
-      //     likes:1,
-      //     dislikes:0,
-      //   }
-
-      //   News.updateOne({id:req.body.offset},{$push:{newsData:newArray}},
-      //     function(err,upres){
-      //         if(err){
-      //           console.log(err);
-      //         }else{
-      //           console.log(upres);
-      //         }
-      //     });
-        
-      // }else{
-      //     for(let i = 0;i<news.newsData.length;i++){
-      //       if(news.newsData[i].postNumber == req.body.number){
-      //         news.newsData[i].likes++;
-      //         console.log(news.newsData[i].likes);
-      //         break;
-      //       }
-      //     }
-      // }
+      console.log(newsPost);
     }
   })
-  console.log(req.body);
-  console.log("fetching ");
+  
 })
 
 let port = 80;

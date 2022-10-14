@@ -2,7 +2,7 @@
 <div class="parent">
 
 
-<% var number = 0, counter = 0;%>
+<% var number = 0;%>
     <% posts.forEach(function(post) { %>
 
         <% number++%>
@@ -32,14 +32,12 @@
                     <a href="<%=post.readMore%>">Read More</a>
                   </div>
                 </div>
-                <button onclick="liked('<%=number%>','<%=dataOffset%>')"  class="btn green" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-                <% if(postData.newData == null ) { %>
-                  <p class="btn">0</p>
-                <% }else if(postData.newData[counter].postNumber == number){ %>   
-                <p class="btn"><%=postData.newData[counter].likes%></p>
-                <% counter++} %> 
+                <button onclick="liked('<%=number%>','<%=dataOffset%>','<%=postData.likes%>')"  class="btn green" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+                
+                  <p class="btn"> <%=postData.likes%> </p>
+                
               <button  value="<%=number%>" class="btn red" > <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
-              
+              <p class="btn"> <%=postData.dislikes%> </p>
               <button  value="<%=number%>" class="btn" > <i class="fa fa-comment fa-lg"></i> </button>
               
               </div>
