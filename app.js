@@ -23,11 +23,7 @@ const newsSchema =new Schema( {
   postNumber: Number,
   likes: Number,
   dislikes: Number,
-  comments:[{
-  username: String,
-  content: String, 
-  }],
-
+  comments:[],
   title: String,
   image:String,
   content:String,
@@ -168,12 +164,12 @@ app.post('/liked', function(req,res) {
   let offset = req.body.offset;
   let likes = req.body.likes;
   let postNumber = req.body.number;
-  console.log(offset,likes,postNumber);
+  
   News.findOneAndUpdate({newsOffset: offset,postNumber: postNumber}, {$set:{likes:likes}},function(err, doc){
     if(err){
       console.log(err);
     }else{
-      console.log(doc);
+      // console.log(doc);
     }
   })
 });
@@ -184,14 +180,31 @@ app.post('/disliked', function(req,res) {
   let offset = req.body.offset;
   let likes = req.body.likes;
   let postNumber = req.body.number;
-  console.log(offset,likes,postNumber);
+  
   News.findOneAndUpdate({newsOffset: offset,postNumber: postNumber}, {$set:{dislikes:likes}},function(err, doc){
     if(err){
       console.log(err);
     }else{
-      console.log(doc);
+      // console.log(doc);
     }
   })
+});
+
+
+app.post('/comment', function(req,res){
+        let newsOffset = req.body.newsOffset;
+        let postNumber = req.body.number;
+        let comment = req.body.comment;
+        console.log(newsOffset,postNumber,comment);
+        News.updateOne({newsOffset:newsOffset, postNumber: postNumber},
+          {$push :{"comments" : comment}},function(err, news) {
+            if(err){
+              console.log(err);
+            }else{
+              console.log(news);
+              console.log("comment is update")
+            }
+          })
 });
 
 
