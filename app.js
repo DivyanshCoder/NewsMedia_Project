@@ -257,6 +257,60 @@ app.get('/newNews/getMore/:newsOffset', function(req, res){
   
 });
 
+// implemeting diffetent category
+
+app.get('/news/category/:cat',function(req,res){
+  let cat = req.params.cat;
+  console.log(cat);
+  let options = {
+    lang: 'en',
+    category: cat,
+  }
+
+  inshorts.getNews(options ,function(result, news_offset){
+
+    News.find({newsOffset: news_offset}, function (err, res){
+      if(err){
+        console.log(err);
+      }else{
+        console.log(res.length);
+        if(res.length == 0){
+          for(let i=0; i<25;i++){
+            const newNews = new News({
+              newsOffset: news_offset,
+              postNumber:i+1,
+              likes:0,
+              dislikes:0,
+              comments:[],
+              title:result[i].title,
+              content:result[i].content,
+              postedAt:result[i].postedAt,
+              readMore:result[i].readMore,
+              image: result[i].image,
+            })
+
+            newNews.save(function(err){
+              if(err){
+                console.log(err);
+              }else{
+                console.log("saved securly");
+              }
+            });
+          }
+        }
+      }
+    });
+
+    res.render("getMoreHome", {
+      posts: result,
+      dataOffset: news_offset}
+      );    
+
+
+  });
+})
+
+
 let port = 80;
 app.listen(port, function() {
     console.log("http://localhost/");
