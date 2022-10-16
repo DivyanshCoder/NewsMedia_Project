@@ -1,0 +1,51 @@
+<%- include('header'); -%>
+<div class="parent">
+
+
+<% var number = 0;%>
+    <% posts.forEach(function(post) { %>
+
+       
+        <% number++%>
+        <div  class="divider">
+            
+            <div class="container">
+                <div class="product-img"> 
+                  
+                  <img src="<%=post.image %>"
+                    alt=""
+                  />
+                  <div>
+    
+                      <h1><%=post.title%></h1>
+                  </div>
+                </div>
+                <div class="product-desc">
+                  <div class="product-text">
+                   
+                    <h2><%=post.postAt%></h2>
+                    <p>
+                        <%=post.content%>
+                    </p>
+                  </div>
+                  <div class="product-price">
+                    <!-- <p><span>99.9 $</span></p> -->
+                    <a target="_blank" href="<%=post.readMore%>">Read More</a>
+                  </div>
+                </div>
+
+                <form action="/<%=number%>/<%= dataOffset%>  " method="get">
+              <button value="<%=number%>"  class="btn green" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+              <button value="<%=number%>" class="btn red" > <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+              <button   value="<%=number%>" class="btn" > <i class="fa fa-comment fa-lg"></i> </button>
+            </form>
+              </div>
+      
+        </div>
+        <% }); %>
+
+        
+</div>
+
+
+<%- include('footer'); -%>

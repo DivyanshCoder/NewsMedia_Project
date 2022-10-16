@@ -301,7 +301,8 @@ app.get('/news/category/:cat',function(req,res){
       }
     });
 
-    res.render("getMoreHome", {
+    // console.log(result);
+    res.render("catagory", {
       posts: result,
       dataOffset: news_offset}
       );    

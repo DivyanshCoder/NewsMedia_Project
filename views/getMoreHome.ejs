@@ -4,7 +4,8 @@
 
 <% var number = 0;%>
     <% posts.forEach(function(post) { %>
-
+<% if(post == undefined) {%>
+<% continue;} %> 
         <% number++%>
         <div  class="divider">
             
