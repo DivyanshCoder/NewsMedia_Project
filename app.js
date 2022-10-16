@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 var Schema = mongoose.Schema;
 
 
+let index = 0;
+let boolean = false;
+
 //body parser
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
@@ -151,6 +154,7 @@ app.get('/:number/:offset',function(req,res){
     if(err){
       console.log(err);
     }else{
+      console.log(news);
       res.render('newPost',{post : news});
     }
   })
@@ -208,6 +212,50 @@ app.post('/comment', function(req,res){
 });
 
 
+app.get('/newNews/getMore/:newsOffset', function(req, res){
+  let newsOffset  = req.params.newsOffset
+  
+  
+    NewsOffsetArray.find({id:"ajaypatidar"},function(err,rest){
+      
+        if(err){
+          console.log(err);
+        }else{
+          console.log("more value");
+         
+          let result = JSON.stringify(rest);
+          
+          let object = JSON.parse(result);
+          // console.log(object[0]['newsOffset'].length);
+
+          if(!boolean){
+            index = object[0]['newsOffset'].length-1;
+            boolean = true;
+          }
+          
+          console.log(index);
+          index = index - 1;
+         
+        console.log(object[0]['newsOffset'][index]);
+        // console.log(prev + "previous index");
+        
+        let options = {
+          lang: 'en',
+          category:  "",
+          news_offset: object[0]['newsOffset'][index],
+        }
+        
+        inshorts.getMoreNews(options ,function(result, news_offset){
+          res.render("getMoreHome", {
+            posts: result,
+            dataOffset: news_offset}
+            ); 
+          });
+        }
+      
+    })
+  
+});
 
 let port = 80;
 app.listen(port, function() {
