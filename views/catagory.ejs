@@ -4,8 +4,8 @@
 
 <% var number = 0;%>
     <% posts.forEach(function(post) { %>
-<% if(post == undefined) {%>
-<% continue;} %> 
+
+       
         <% number++%>
         <div  class="divider">
             
@@ -40,18 +40,11 @@
               <button   value="<%=number%>" class="btn" > <i class="fa fa-comment fa-lg"></i> </button>
             </form>
               </div>
-        
-
-
-              <!-- liked and dislike button -->
-
-              
+      
         </div>
         <% }); %>
 
-        <form action="" method="get">
-          <button  class="btn btn-outline-primary">get more news</button>
-        </form>
+        
 </div>
 
 

@@ -1,0 +1,68 @@
+<%- include('header'); -%>
+<div class="parent">
+<div  class="divider">
+            
+    <div class="container">
+        <div class="product-img"> 
+          
+          <img src="<%=post.image %>"
+            alt=""
+          />
+          <div>
+
+              <h1><%=post.title%></h1>
+          </div>
+        </div>
+        <div class="product-desc">
+          <div class="product-text">
+           
+            <h2><%=post.postAt%></h2>
+            <p>
+                <%=post.content%>
+            </p>
+          </div>
+          <div class="product-price">
+            <!-- <p><span>99.9 $</span></p> -->
+            <a  target="_blank" href="<%=post.readMore%>">Read More</a>
+          </div>
+        </div>
+        <button onclick="liked('<%=post.postNumber%>','<%=post.newsOffset%>','<%=post.likes%>')"  class="btn green" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+        <p class="btn" id="liked" ><%=post.likes%></p>
+        
+        <button onclick="disliked('<%=post.postNumber%>','<%=post.newsOffset%>','<%=post.dislikes%>')"  class="btn red" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>     
+         <p class="btn" id="disliked" ><%=post.dislikes%></p>
+         
+         
+         
+         
+        </div>
+        <!-- comment box -->
+
+        <div class="container">
+
+          <div class="form-group">
+            <textarea class="form-control status-box" rows="3" placeholder="Enter your comment here..."></textarea>
+          </div>
+
+        <div class="button-group pull-right">
+          <p number="<%=post.postNumber%>" newsOffset="<%=post.newsOffset%>" id="value" class="counter">250</p>
+          <a href="#" class="btn btn-primary">Post</a>
+        </div>
+        <li class="posts">
+        <% if(post.comments.length != 0) { %>
+          
+          <% for(let i = 0; i < post.comments.length; i++) { %>
+            <li class="list"><%=post.comments[i] %> </li>
+            <% }} %>   
+          </li>
+      </div>
+        
+
+
+
+
+      <!-- liked and dislike button -->
+
+      <script src="/public/javascript.js"></script>
+</div>
+ 

@@ -1,8 +1,8 @@
 <%- include('header'); -%>
 <div class="parent">
+<div><a href="news/category/sports">sports</a> </div>
 
-
-<% var number = 0, counter = 0;%>
+<% var number = 0;%>
     <% posts.forEach(function(post) { %>
 
         <% number++%>
@@ -29,19 +29,15 @@
                   </div>
                   <div class="product-price">
                     <!-- <p><span>99.9 $</span></p> -->
-                    <a href="<%=post.readMore%>">Read More</a>
+                    <a target="_blank" href="<%=post.readMore%>">Read More</a>
                   </div>
                 </div>
-                <button onclick="liked('<%=number%>','<%=dataOffset%>')"  class="btn green" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-                <% if(postData.newData == null ) { %>
-                  <p class="btn">0</p>
-                <% }else if(postData.newData[counter].postNumber == number){ %>   
-                <p class="btn"><%=postData.newData[counter].likes%></p>
-                <% counter++} %> 
-              <button  value="<%=number%>" class="btn red" > <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
-              
-              <button  value="<%=number%>" class="btn" > <i class="fa fa-comment fa-lg"></i> </button>
-              
+
+                <form action="/<%=number%>/<%= dataOffset%>  " method="get">
+              <button value="<%=number%>"  class="btn green" > <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+              <button value="<%=number%>" class="btn red" > <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+              <button   value="<%=number%>" class="btn" > <i class="fa fa-comment fa-lg"></i> </button>
+            </form>
               </div>
         
 
@@ -50,9 +46,12 @@
 
               
         </div>
-         
-    
-
         <% }); %>
+
+        <form action="newNews/getMore/<%=dataOffset%>" method="get">
+          <button  class="btn btn-outline-primary">get more news</button>
+        </form>
 </div>
+
+
 <%- include('footer'); -%>
