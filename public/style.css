@@ -143,7 +143,7 @@ li {
 
 }
 
-.btn:focus {
+.btnex:focus {
   outline: none;
 }
 
@@ -154,6 +154,7 @@ li {
 .red{
   color: red;
 } 
+
 
 @media only screen 
 and (min-device-width : 320px) 
