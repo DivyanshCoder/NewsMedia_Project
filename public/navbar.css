@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+header {
+    display: flex;
+    background-color: #0c042e;
+    justify-content: space-around;
+    padding: 1rem 0;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.headerlogo {
+    color: #eeee;
+    font-weight: 600;
+    font-size: x-large;
+    margin-right: 10cm;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    font-size: large;
+    padding: 3% 3% 3% 3%;
+}
+
+.nav-item {
+    margin: 0 8px;
+}
+
+.nav-link {
+    padding: 10px;
+    color: #eeee;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: #3e9ccf;
+}
+
+.header-toggle,
+.header-close {
+display: none;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        height: 48px;
+        justify-content: space-between;
+        padding: 0 28px;
+    }
+    .logo a{
+        font-size: 0.9rem;
+    }
+    .logo img {
+        width: 30px;
+    }
+    .header-toggle { 
+        display: inline;
+        color: #eeee;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    .header-close {
+        position: absolute;
+        right: 24px;
+        display: block;
+        font-size: 24px;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+    .header-close:hover {
+        background-color:  #372948;
+    }
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        background: #b352ab;
+        
+        color: #eeee;
+        width: 60%;
+        height: 100vh;
+        padding: 24px 0;
+        z-index: 100;
+        transition: 0.5s;
+        border-radius: 0 0 0 50%;
+        
+    }
+
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        font-weight: 600;
+    }
+    .nav-item {
+        margin: 2rem 0;
+    }
+    .show {
+        right: 0;
+    }
+}

@@ -1,6 +1,9 @@
 <%- include('header'); -%>
+<%- include('navbar'); -%>
+
 <div class="parent">
 <div><a href="news/category/sports">sports</a> </div>
+
 
 <% var number = 0;%>
     <% posts.forEach(function(post) { %>
@@ -49,7 +52,7 @@
         <% }); %>
 
         <form action="newNews/getMore/<%=dataOffset%>" method="get">
-          <button  class="btn btn-outline-primary">get more news</button>
+          <button class="btn-outline-primary">Want More News !!</button>
         </form>
 </div>
 
