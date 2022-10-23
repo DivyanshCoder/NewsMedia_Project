@@ -320,6 +320,11 @@ app.get('/navbar',function(req, res){
   res.sendFile(__dirname + "/views/navbar.html")
 })
 
+
+app.get('/about',function(req, res){
+  res.render("about");
+})
+
 let port = 80;
 app.listen(port, function() {
     console.log("http://localhost/");

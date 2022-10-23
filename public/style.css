@@ -240,3 +240,26 @@ and (max-device-width : 480px) {
   min-height: 42px;
   box-shadow:8px 8px 5px #888888;
 }
+
+
+/* horizontal scorling navbar */
+
+div.scrollmenu {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 18px;
+  text-decoration: none;
+  padding-left: 39px;
+  padding-right: 35px;
+}
+
+div.scrollmenu a:hover {  
+  background-color: #777;
+}
