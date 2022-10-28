@@ -170,19 +170,26 @@ and (min-device-width : 320px)
 and (max-device-width : 480px) {
   /* Styles */
    .product-img {
-    width: 327px;
+    width: 320px;
     display: block;
   }
 
   .product-img div h1{
-    padding-left:5px;
+    padding-left:2px;
     text-align: left; 
+    inline-size: 280px; 
+    overflow: hidden;
+    
   }
 
   .product-img img {
-    width: 300px;
+    width: 240px;
     object-fit: cover;
     border-radius: 10px 10px 10px 10px;
+  }
+  .divider
+  {
+    margin-left: 20%;
   }
 }
 
