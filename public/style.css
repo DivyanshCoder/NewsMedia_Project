@@ -183,14 +183,13 @@ and (max-device-width : 480px) {
   }
 
   .product-img img {
-    width: 240px;
+    width: 280px;
     object-fit: cover;
     border-radius: 10px 10px 10px 10px;
+    
+    margin-left: 10 px;
   }
-  .divider
-  {
-    margin-left: 20%;
-  }
+  
 }
 
 
