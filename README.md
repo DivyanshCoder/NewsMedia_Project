@@ -16,3 +16,4 @@ EJS <br />
 Ajay Patidar <br />
 Divyansh Patni <br />
 
+Link: https://newsmediaapp.onrender.com/
